@@ -27,6 +27,8 @@ public class DaoFactory {
                 return (T) new OrderDetailDaoImpl();
             case LOYALTY_CARD:
                 return (T) new LoyaltyCardDaoImpl();
+            case ORDER:
+                return (T) new OrderDaoImpl();
             default:
                 return null;
         }
