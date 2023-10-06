@@ -23,8 +23,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class ProductMainPageController {
     public AnchorPane context;
@@ -105,9 +107,12 @@ public class ProductMainPageController {
                         if (bo.deleteProduct(dto.getCode())) {
                             new Alert(Alert.AlertType.INFORMATION, "Deleted").show();
                             loadAllProducts(searchText);
+                            loadProductId();
                         } else {
                             new Alert(Alert.AlertType.WARNING, "Try Again!").show();
                         }
+                    }catch(SQLIntegrityConstraintViolationException e){
+                        new Alert(Alert.AlertType.WARNING, "Cannot delete this field. Please Try again later!").show();
                     } catch (SQLException | ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
@@ -133,27 +138,29 @@ public class ProductMainPageController {
         setUi("DashboardForm");
     }
 
-    public void btnNewProductOnAction(ActionEvent actionEvent) {
-        clearFields();
-        txtProductCode.setEditable(true);
-        txtProductDescription.setEditable(true);
-    }
-
     public void btnSaveProductOnAction(ActionEvent actionEvent)  {
         try{
-            if(!Objects.equals(txtProductCode.getText(), "")){
+            Validator validator=new Validator();
+            TextArea[] textFieldsToValidate={
+                    txtProductDescription
+            };
+            Pattern[] patternsToValidate={
+                    validator.prodDescPattern
+            };
+            if(validator.validate(textFieldsToValidate,patternsToValidate)){
                 if(bo.saveProduct(new ProductDto( Integer.parseInt(txtProductCode.getText())
                         ,txtProductDescription.getText()))){
                     new Alert(Alert.AlertType.CONFIRMATION,"Product Saved!").show();
-                    txtProductCode.setEditable(false);
-                    txtProductDescription.setEditable(false);
                     loadAllProducts(searchText);
+                    clearFields();
+                    loadProductId();
                 }else {
                     new Alert(Alert.AlertType.WARNING,"Try Again!").show();
                 }
             }else {
-                new Alert(Alert.AlertType.WARNING,"Enter Product code and Description to continue!").show();
+                new Alert(Alert.AlertType.WARNING,"Please Enter Valid Data!").show();
             }
+
 
         }catch (SQLException|ClassNotFoundException e){
             e.printStackTrace();

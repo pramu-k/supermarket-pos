@@ -1,6 +1,7 @@
 package com.supermarket.pos.controller;
 
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 
 import java.util.regex.Pattern;
 
@@ -18,7 +19,7 @@ public class Validator {
     public Pattern cusSalaryPattern=Pattern.compile(CUS_SALARY_REG);
     public Pattern prodDescPattern=Pattern.compile(PROD_DESC_REG);
 
-    public boolean validate(TextField[] textFields, Pattern[] patterns){
+    public boolean validate(TextInputControl[] textFields, Pattern[] patterns){
         for (int i = 0; i < textFields.length; i++) {
             if(!validateFields(textFields[i].getText(),patterns[i])){
                 textFields[i].setStyle("-fx-border-color: red");
@@ -30,7 +31,7 @@ public class Validator {
         return true;
 
     }
-    public boolean validateFields(String name,Pattern pattern){
+    private boolean validateFields(String name,Pattern pattern){
         if(pattern.matcher(name).matches()){
             return true;
         }else {
