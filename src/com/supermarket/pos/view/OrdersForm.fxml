@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.supermarket.pos.view.OrdersFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="430.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.controller.OrdersFormController">
+   <children>
+      <TableView fx:id="tblOrderDetails" layoutX="8.0" layoutY="48.0" prefHeight="375.0" prefWidth="669.0">
+        <columns>
+          <TableColumn fx:id="colOrderId" prefWidth="99.0" text="Order Id" />
+          <TableColumn fx:id="colOrderDate" prefWidth="111.0" text="Issued Date" />
+            <TableColumn fx:id="colDiscount" prefWidth="101.0" text="Total Discount" />
+            <TableColumn fx:id="colTotalCost" prefWidth="107.0" text="Total Cost" />
+            <TableColumn fx:id="colCustomerEmail" prefWidth="113.0" text="Customer Email" />
+            <TableColumn fx:id="colUserEmail" prefWidth="137.0" text="User Email" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="14.0" text="Order Details">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
