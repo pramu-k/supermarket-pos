@@ -55,7 +55,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <JFXButton layoutX="414.0" layoutY="321.0" onAction="#btnSaveBatchOnAction" style="-fx-background-color: #34495e;" text="Save Batch" textFill="WHITE" />
+      <JFXButton fx:id="btnSaveBatch" layoutX="414.0" layoutY="321.0" onAction="#btnSaveBatchOnAction" style="-fx-background-color: #34495e;" text="Save Batch" textFill="WHITE" />
       <Label layoutX="264.0" layoutY="223.0" text="Discount %">
          <font>
             <Font size="15.0" />

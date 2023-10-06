@@ -76,6 +76,7 @@ public class ProductMainPageController {
         tblProductInventory.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 loadExternalUi(true,newValue);
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -174,7 +175,7 @@ public class ProductMainPageController {
 
 
     }
-    private void loadBatchData(int code) throws SQLException, ClassNotFoundException {
+    public void loadBatchData(int code) throws SQLException, ClassNotFoundException {
         ObservableList<ProductDetailTm> observableList=FXCollections.observableArrayList();
         for (ProductDetailDto d: productDetailsBo.findAllProductDetails(code)) {
             Button btn = new Button("Delete");
@@ -211,6 +212,7 @@ public class ProductMainPageController {
    private void setUi (String url) throws IOException {
         Stage stage =(Stage)context.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+url+".fxml"))));
+        stage.setTitle(url);
         stage.centerOnScreen();
     }
     private void clearFields(){
@@ -229,6 +231,7 @@ public class ProductMainPageController {
             stage.setScene(new Scene(parent));
             stage.show();
             stage.centerOnScreen();
+
         }else {
             new Alert(Alert.AlertType.WARNING,"Please Select A Product!").show();
         }

@@ -53,6 +53,7 @@ public class SignUpFormController {
     private void setUi (String url) throws IOException {
         Stage stage =(Stage)context.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+url+".fxml"))));
+        stage.setTitle(url);
         stage.centerOnScreen();
     }
 }

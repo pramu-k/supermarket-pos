@@ -24,7 +24,10 @@ public class DashboardFormController {
     }
 
     public void btnOrderDetailsOnAction(ActionEvent actionEvent) throws IOException {
-        setUi("OrdersForm");
+        Stage newFormStage = new Stage();
+        newFormStage.setTitle("View Orders");
+        newFormStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/OrdersForm.fxml"))));
+        newFormStage.show();
     }
 
     public void btnIncomeReportOnAction(ActionEvent actionEvent) {
@@ -32,6 +35,7 @@ public class DashboardFormController {
     private void setUi (String url) throws IOException {
         Stage stage =(Stage)context.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+url+".fxml"))));
+        stage.setTitle(url);
         stage.centerOnScreen();
     }
 

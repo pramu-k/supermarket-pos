@@ -10,9 +10,12 @@ import com.supermarket.pos.bo.custom.CustomerBo;
 import com.supermarket.pos.bo.custom.LoyaltyCardBo;
 import com.supermarket.pos.bo.custom.OrderDetailBo;
 import com.supermarket.pos.bo.custom.ProductDetailsBo;
+import com.supermarket.pos.dao.DaoFactory;
+import com.supermarket.pos.dao.custom.OrderDao;
 import com.supermarket.pos.dto.*;
 import com.supermarket.pos.enums.BoType;
 import com.supermarket.pos.enums.CardType;
+import com.supermarket.pos.enums.DaoType;
 import com.supermarket.pos.util.QrDataGenerator;
 import com.supermarket.pos.util.UserSessionData;
 import com.supermarket.pos.view.tm.CartTm;
@@ -64,6 +67,7 @@ public class PlaceOrderFormController {
     public Label lblGrandTotal;
 
     CustomerBo customerBo= BoFactory.getInstance().getBo(BoType.CUSTOMER);
+    OrderDao orderDao= DaoFactory.getInstance().getDao(DaoType.ORDER);
     private ProductDetailsBo productDetailsBo= BoFactory.getInstance().getBo(BoType.PRODUCT_DETAILS);
     private OrderDetailBo orderDetailBo= BoFactory.getInstance().getBo(BoType.ORDER_DETAIL);
     private LoyaltyCardBo loyaltyCardBo= BoFactory.getInstance().getBo(BoType.LOYALTY_CARD);
@@ -271,7 +275,7 @@ public class PlaceOrderFormController {
         txtBuyingPrice.clear();
     }
 
-    public void btnCompleteOrderOnAction(ActionEvent actionEvent) {
+    public void btnCompleteOrderOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         ArrayList<ItemDetailDto> dtoList=new ArrayList<>();
         double discount=0;
         for (CartTm tm:tms) {
@@ -283,7 +287,7 @@ public class PlaceOrderFormController {
             discount+=tm.getDiscount();
         }
         OrderDetailDto orderDetailDto=new OrderDetailDto(
-                new Random().nextInt(100001),
+                generateOrderId(),
                 new Date(),
                 Double.parseDouble(lblGrandTotal.getText().split("/=")[0]),
                 txtEmail.getText(),
@@ -308,6 +312,9 @@ public class PlaceOrderFormController {
         txtName.clear();
         txtContact.clear();
         txtSalary.clear();
+    }
+    private int generateOrderId() throws SQLException, ClassNotFoundException {
+        return orderDao.getLastProductId()+1;
     }
 
 }

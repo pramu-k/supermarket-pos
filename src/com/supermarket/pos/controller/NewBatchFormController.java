@@ -4,6 +4,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.supermarket.pos.bo.BoFactory;
 import com.supermarket.pos.bo.custom.ProductDetailsBo;
@@ -43,6 +44,7 @@ public class NewBatchFormController {
     public TextField txtShowPrice;
     public JFXRadioButton rBtnYes;
     public JFXRadioButton rBtnNo;
+    public JFXButton btnSaveBatch;
     String uniqueData=null;
     BufferedImage bufferedImage = null;
     Stage stage=null;
@@ -77,6 +79,7 @@ public class NewBatchFormController {
                 ProductDetailDto productDetails = productDetailsBo.findProductDetails(tm.getCode());
                 if(productDetails!=null){
                     //load data
+                    btnSaveBatch.setDisable(true);
                     txtQty.setText(String.valueOf(productDetails.getQtyOnHand()));
                     txtBuyingPrice.setText(String.valueOf(productDetails.getBuyingPrice()));
                     txtSellingPrice.setText(String.valueOf(productDetails.getSellingPrice()));
@@ -125,7 +128,6 @@ public class NewBatchFormController {
             }else {
                 new Alert(Alert.AlertType.WARNING,"Please Try Again!").show();
             }
-
         } catch (SQLException | ClassNotFoundException | InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -139,6 +141,7 @@ public class NewBatchFormController {
     private void setUi (String url) throws IOException {
         Stage stage =(Stage)context.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/"+url+".fxml"))));
+        stage.setTitle(url);
         stage.centerOnScreen();
     }
 }
