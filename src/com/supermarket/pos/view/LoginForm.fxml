@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="context" prefHeight="400.0" prefWidth="309.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.controller.LoginFormController">
+   <children>
+      <Label layoutX="106.0" layoutY="12.0" text="Supermarket" textFill="#5b0707">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="45.0" text="Login">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="15.0" layoutY="65.0" prefHeight="4.0" prefWidth="281.0" />
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="14.0" layoutY="84.0" prefHeight="25.0" prefWidth="281.0" promptText="Email">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="14.0" layoutY="157.0" prefHeight="25.0" prefWidth="281.0" promptText="Password">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXPasswordField>
+      <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="238.0" onAction="#btnSignInOnAction" prefHeight="25.0" prefWidth="281.0" style="-fx-background-color: #2980b9;" text="Sign in" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="15.0" layoutY="324.0" onAction="#btnCreateAccountOnAction" prefHeight="25.0" prefWidth="281.0" style="-fx-background-color: #2c3e50;" text="Create a New Account" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label layoutX="146.0" layoutY="288.0" text="Or" />
+   </children>
+</AnchorPane>
