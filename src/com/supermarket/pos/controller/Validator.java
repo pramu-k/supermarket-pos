@@ -23,15 +23,16 @@ public class Validator {
     public Pattern passwordPattern=Pattern.compile(PASSWORD_REG);
 
     public boolean validate(TextInputControl[] textFields, Pattern[] patterns){
+        boolean output =true;
         for (int i = 0; i < textFields.length; i++) {
             if(!validateFields(textFields[i].getText(),patterns[i])){
                 textFields[i].setStyle("-fx-border-color: red");
-                return false;
+                output=false;
             }else {
                 textFields[i].setStyle("-fx-border-color: green");
             }
         }
-        return true;
+        return output;
 
     }
     private boolean validateFields(String name,Pattern pattern){

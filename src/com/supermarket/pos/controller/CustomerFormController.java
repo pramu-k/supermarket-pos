@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
@@ -169,6 +170,9 @@ public class CustomerFormController {
             }else {
                 new Alert(Alert.AlertType.WARNING,"Please Enter Valid Data!").show();
             }
+        }catch (SQLIntegrityConstraintViolationException e){
+            new Alert(Alert.AlertType.WARNING,"Customer already exists!").show();
+
         }catch (SQLException|ClassNotFoundException e){
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
