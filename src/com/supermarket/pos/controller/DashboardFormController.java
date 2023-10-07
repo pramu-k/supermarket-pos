@@ -30,7 +30,11 @@ public class DashboardFormController {
         newFormStage.show();
     }
 
-    public void btnIncomeReportOnAction(ActionEvent actionEvent) {
+    public void btnIncomeReportOnAction(ActionEvent actionEvent) throws IOException {
+        Stage newFormStage = new Stage();
+        newFormStage.setTitle("Income Report");
+        newFormStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/IncomeReportForm.fxml"))));
+        newFormStage.show();
     }
     private void setUi (String url) throws IOException {
         Stage stage =(Stage)context.getScene().getWindow();

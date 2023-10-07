@@ -103,10 +103,11 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
     public boolean manageQuantity(String barcode, int qty) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("UPDATE product_details SET qty_on_hand=(qty_on_hand-?) WHERE code=?",qty,barcode);
     }
-    public int findBuyingPriceByBatchCode(String batchCode) throws SQLException, ClassNotFoundException {
+    @Override
+    public double findBuyingPriceByBatchCode(String batchCode) throws SQLException, ClassNotFoundException {
         ResultSet resultSet= CrudUtil.execute("SELECT buying_price FROM product_details WHERE code=?", batchCode);
         if(resultSet.next()){
-           int buyingPrice=resultSet.getInt("buying_price");
+           double buyingPrice=resultSet.getInt("buying_price");
            return buyingPrice;
         }else {
             return 0;
