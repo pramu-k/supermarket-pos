@@ -35,6 +35,6 @@ public class ItemDetailDaoImpl implements ItemDetailDao {
 
     @Override
     public List<ItemDetail> findAll() throws SQLException, ClassNotFoundException {
-        return null;
+        return CrudUtil.execute("SELECT * FROM order_details_has_product_details");
     }
 }
