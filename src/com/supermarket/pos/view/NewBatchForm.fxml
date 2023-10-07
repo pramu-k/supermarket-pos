@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
@@ -55,7 +56,10 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </TextField>
-      <JFXButton fx:id="btnSaveBatch" layoutX="414.0" layoutY="321.0" onAction="#btnSaveBatchOnAction" style="-fx-background-color: #34495e;" text="Save Batch" textFill="WHITE" />
+      <JFXButton fx:id="btnSaveBatch" layoutX="414.0" layoutY="321.0" onAction="#btnSaveBatchOnAction" style="-fx-background-color: #34495e;" text="Save Batch" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
       <Label layoutX="264.0" layoutY="223.0" text="Discount %">
          <font>
             <Font size="15.0" />
@@ -67,6 +71,9 @@
          </toggleGroup>
       </JFXRadioButton>
       <JFXRadioButton fx:id="rBtnNo" layoutX="317.0" layoutY="261.0" selected="true" text="No" toggleGroup="$group" />
-      <JFXButton layoutX="423.0" layoutY="11.0" onAction="#btnBackToProductMainOnAction" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #34495e;" text="Back" textFill="WHITE" />
+      <JFXButton layoutX="423.0" layoutY="11.0" onAction="#btnBackToProductMainOnAction" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #34495e;" text="Back" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></JFXButton>
    </children>
 </AnchorPane>

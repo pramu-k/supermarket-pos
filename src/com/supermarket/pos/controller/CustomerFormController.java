@@ -136,7 +136,7 @@ public class CustomerFormController {
                     txtCustomerSalary
             };
             Pattern[] patternsToValidate={
-                    validator.cusEmailPattern,
+                    validator.emailPattern,
                     validator.cusNamePattern,
                     validator.cusContactPattern,
                     validator.cusSalaryPattern
@@ -181,6 +181,11 @@ public class CustomerFormController {
         txtCustomerName.clear();
         txtCustomerContact.clear();
         txtCustomerSalary.clear();
+        txtCustomerSalary.setStyle("-fx-background-color:none");
+        txtCustomerName.setStyle("-fx-background-color:none");
+        txtCustomerContact.setStyle("-fx-background-color:none");
+        txtCustomerEmail.setStyle("-fx-background-color:none");
+
     }
     private void setUi (String url) throws IOException {
         Stage stage =(Stage)context.getScene().getWindow();

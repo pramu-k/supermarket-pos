@@ -7,7 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="context" prefHeight="400.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supermarket.pos.controller.SignUpFormController">
    <children>
@@ -31,7 +31,7 @@
             <Font size="14.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton buttonType="RAISED" layoutX="11.0" layoutY="248.0" onAction="#btnRegisterOnAction" prefHeight="25.0" prefWidth="281.0" style="-fx-background-color: #2980b9;" text="Register Now!" textAlignment="CENTER">
+      <JFXButton buttonType="RAISED" layoutX="11.0" layoutY="260.0" onAction="#btnRegisterOnAction" prefHeight="25.0" prefWidth="281.0" style="-fx-background-color: #2980b9;" text="Register Now!" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -47,6 +47,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label layoutX="142.0" layoutY="298.0" text="Or" />
+      <Label layoutX="142.0" layoutY="304.0" text="Or" />
+      <Text layoutX="11.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note: Password must contain at least one Capital letter, one simple letter and one number" wrappingWidth="280.9999993443489" />
    </children>
 </AnchorPane>

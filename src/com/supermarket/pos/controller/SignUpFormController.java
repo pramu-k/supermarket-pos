@@ -11,11 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 public class SignUpFormController {
     public AnchorPane context;
@@ -25,17 +27,31 @@ public class SignUpFormController {
 
     public void btnRegisterOnAction(ActionEvent actionEvent) {
         try {
-            if(bo.saveUser(new UserDto( txtEmail.getText(),txtPassword.getText()))){
-                new Alert(Alert.AlertType.CONFIRMATION,"User Saved Successfully!").show();
-                clearFields();
-                try {
-                    setUi("LoginForm");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+            Validator validator=new Validator();
+            TextField[] textFieldsToValidate={
+                    txtEmail,
+                    txtPassword
+            };
+            Pattern[] patternsToValidate={
+                    validator.emailPattern,
+                    validator.passwordPattern,
+            };
+            if(validator.validate(textFieldsToValidate,patternsToValidate)){
+                if(bo.saveUser(new UserDto( txtEmail.getText(),txtPassword.getText()))){
+                    new Alert(Alert.AlertType.CONFIRMATION,"User Saved Successfully!").show();
+                    clearFields();
+                    try {
+                        setUi("LoginForm");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else {
+                    new Alert(Alert.AlertType.WARNING,"User not Saved. Try Again!").show();
                 }
             }else {
-                new Alert(Alert.AlertType.WARNING,"User not Saved. Try Again!").show();
+                new Alert(Alert.AlertType.WARNING,"Please Enter Valid Data!").show();
             }
+
         }catch (ClassNotFoundException| SQLException e){
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
