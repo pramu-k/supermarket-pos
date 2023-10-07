@@ -298,6 +298,7 @@ public class PlaceOrderFormController {
             if(orderDetailBo.makeOrder(orderDetailDto)){
                 new Alert(Alert.AlertType.CONFIRMATION,"Order Saved!").show();
                 clearFields();
+                tms.clear();
             }else {
                 new Alert(Alert.AlertType.WARNING,"Try Again!").show();
             }
