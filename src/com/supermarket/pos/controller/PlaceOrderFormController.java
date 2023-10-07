@@ -276,36 +276,41 @@ public class PlaceOrderFormController {
     }
 
     public void btnCompleteOrderOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        ArrayList<ItemDetailDto> dtoList=new ArrayList<>();
-        double discount=0;
-        for (CartTm tm:tms) {
-            dtoList.add(new ItemDetailDto(
-                    tm.getCode(),
-                    tm.getQty(),
-                    tm.getDiscount(),
-                    tm.getTotalCost()));
-            discount+=tm.getDiscount();
-        }
-        OrderDetailDto orderDetailDto=new OrderDetailDto(
-                generateOrderId(),
-                new Date(),
-                Double.parseDouble(lblGrandTotal.getText().split("/=")[0]),
-                txtEmail.getText(),
-                discount,
-                UserSessionData.email,
-                dtoList);
-        try {
-            if(orderDetailBo.makeOrder(orderDetailDto)){
-                new Alert(Alert.AlertType.CONFIRMATION,"Order Saved!").show();
-                clearFields();
-                tms.clear();
-            }else {
+        if(!tms.isEmpty()){
+            ArrayList<ItemDetailDto> dtoList=new ArrayList<>();
+            double discount=0;
+            for (CartTm tm:tms) {
+                dtoList.add(new ItemDetailDto(
+                        tm.getCode(),
+                        tm.getQty(),
+                        tm.getDiscount(),
+                        tm.getTotalCost()));
+                discount+=tm.getDiscount();
+            }
+            OrderDetailDto orderDetailDto=new OrderDetailDto(
+                    generateOrderId(),
+                    new Date(),
+                    Double.parseDouble(lblGrandTotal.getText().split("/=")[0]),
+                    txtEmail.getText(),
+                    discount,
+                    UserSessionData.email,
+                    dtoList);
+            try {
+                if(orderDetailBo.makeOrder(orderDetailDto)){
+                    new Alert(Alert.AlertType.CONFIRMATION,"Order Saved!").show();
+                    clearFields();
+                    tms.clear();
+                }else {
+                    new Alert(Alert.AlertType.WARNING,"Try Again!").show();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
                 new Alert(Alert.AlertType.WARNING,"Try Again!").show();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.WARNING,"Try Again!").show();
+        }else {
+            new Alert(Alert.AlertType.WARNING,"Please add products before continue!").show();
         }
+
     }
 
     private void clearFields() {
@@ -313,6 +318,7 @@ public class PlaceOrderFormController {
         txtName.clear();
         txtContact.clear();
         txtSalary.clear();
+        lblGrandTotal.setText("00/=");
     }
     private int generateOrderId() throws SQLException, ClassNotFoundException {
         return orderDao.getLastProductId()+1;
