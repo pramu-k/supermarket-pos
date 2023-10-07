@@ -192,7 +192,7 @@ public class PlaceOrderFormController {
             if(p!=null){
                 txtDescription.setText(p.getDescription());
                 txtQtyOnHand.setText(String.valueOf(p.getProductDetailDto().getQtyOnHand()));
-                txtDiscount.setText(String.valueOf(0));
+                txtDiscount.setText(String.valueOf(p.getProductDetailDto().getShowPrice()-p.getProductDetailDto().getSellingPrice()));
                 txtShowPrice.setText(String.valueOf(p.getProductDetailDto().getShowPrice()));
                 txtSellingPrice.setText(String.valueOf(p.getProductDetailDto().getSellingPrice()));
                 txtBuyingPrice.setText(String.valueOf(p.getProductDetailDto().getBuyingPrice()));
@@ -212,7 +212,7 @@ public class PlaceOrderFormController {
         int qty=Integer.parseInt(txtQty.getText());
         double sellingPrice=Double.parseDouble(txtSellingPrice.getText());
         double totalCost=qty*sellingPrice;
-        double discount=Double.parseDouble(txtShowPrice.getText())-sellingPrice;
+        double discount=qty*(Double.parseDouble(txtShowPrice.getText())-sellingPrice);
 
         CartTm selectedCartTm=isExist(txtBarcode.getText());
 

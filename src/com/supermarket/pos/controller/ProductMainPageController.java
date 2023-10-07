@@ -53,7 +53,7 @@ public class ProductMainPageController {
     ProductDetailsBo productDetailsBo=BoFactory.getInstance().getBo(BoType.PRODUCT_DETAILS);
     private String searchText="";
 
-    public void initialize() throws SQLException, ClassNotFoundException {
+    public void initialize() throws SQLException, ClassNotFoundException,NullPointerException {
         colProductId.setCellValueFactory(new PropertyValueFactory<>("productId")); //names are taken from Tm class
         colProductDescription.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
         colShowMore.setCellValueFactory(new PropertyValueFactory<>("showMore"));
